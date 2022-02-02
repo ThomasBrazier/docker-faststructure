@@ -15,3 +15,5 @@ RUN wget --no-check-certificate \
 	cd .. && \
 	python setup.py build_ext --inplace && \
 	mkdir data/
+
+ENTRYPOINT ["/faststructure"]
