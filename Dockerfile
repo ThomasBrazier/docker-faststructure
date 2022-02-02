@@ -1,19 +1,17 @@
-FROM ubuntu
+FROM debian:stretch
 
-RUN install_packages \
-		cython \
-		python-dev \
-		python-numpy \
-		python-scipy \
-		libgsl0-dev \
-		gcc \
-		wget
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt install -y \
+    wget git python-dev cython libgsl0-dev cython gcc python-numpy python-scipy\
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /fstr
+WORKDIR /faststructure
+
 RUN wget --no-check-certificate \
 	https://github.com/rajanil/fastStructure/archive/master.tar.gz && \
 	tar --strip-components=1 -xvzf master.tar.gz && \
-	cd /fstr/vars && \
+	cd vars/ && \
 	python setup.py build_ext --inplace && \
-	cd /fstr/ && \
-	python setup.py build_ext --inplace
+	cd .. && \
+	python setup.py build_ext --inplace && \
+	mkdir data/
