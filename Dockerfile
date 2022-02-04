@@ -2,8 +2,10 @@ FROM debian:stretch
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
-    wget git python-dev cython libgsl0-dev cython gcc python-numpy python-scipy\
-    && rm -rf /var/lib/apt/lists/*
+    wget git python-dev cython libgsl0-dev cython gcc python-numpy python-scipy python-matplotlib x11-xserver-utils\
+    && rm -rf /var/lib/apt/lists/* && echo "backend: svg" >> /etc/matplotlib
+
+ENV MPLBACKEND=SVG 
 
 WORKDIR /faststructure
 
