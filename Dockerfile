@@ -7,7 +7,7 @@ RUN apt update && apt install -y \
 
 ENV MPLBACKEND=SVG 
 
-WORKDIR /faststructure
+WORKDIR /mnt
 
 RUN wget --no-check-certificate \
 	https://github.com/rajanil/fastStructure/archive/master.tar.gz && \
@@ -18,4 +18,4 @@ RUN wget --no-check-certificate \
 	python setup.py build_ext --inplace && \
 	mkdir data/
 
-ENTRYPOINT ["/faststructure"]
+ENTRYPOINT ["/mnt"]
